@@ -7,20 +7,24 @@ class Polynome(Expression):
     def __init__(self, coefficients: list[float]):
         self.coefficients = coefficients
     def evaluer(self, x: float) -> float:
+        eval = self.coefficients.copy()
         valeur = 0
-        for i in range(0, len(self.coefficients)):
-            self.coefficients[i] = self.coefficients[i] * (x**i)
-            valeur += self.coefficients[i]
+        for i in range(0, len(eval)):
+            eval[i] = eval[i] * (x**i)
+            valeur += eval[i]
         return valeur
     def deriver(self) -> "Expression":
         coefficients_derives = self.coefficients.copy()
-        coefficients_derives.pop(0)     
-        for i in range(0, len(self.coefficients)-1):
-            coefficients_derives[i] = self.coefficients[i] * (i+2)
-        return coefficients_derives
+        for i in range(0, len(coefficients_derives)):
+            coefficients_derives[i] = coefficients_derives[i] * i
+        coefficients_derives.pop(0)
+        if coefficients_derives == []:
+            coefficients_derives = [0]
+        return Polynome(coefficients_derives)
     def __str__(self) -> str:
         return str(self.coefficients)
-
-x = Polynome([1, 2, 3])
-derivee = x.evaluer(2)
-print(derivee)
+if __name__ == "__main__":
+    p = Polynome([1, 2, 3])
+    print(p)
+    print(p.evaluer(2))
+    print(p.deriver())

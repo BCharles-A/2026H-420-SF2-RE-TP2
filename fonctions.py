@@ -34,9 +34,8 @@ class Exp(Expression):
         self.u = u
         self.base = base
     def evaluer(self, x):
-        return self.base ** (self.u.evaluer(x) *  (math.log(x, math.e)* self.u.evaluer(x)))
+        return math.pow(self.base, self.u.evaluer(x))
     def deriver(self):
-        return Multiplication(Exp(self.base, self.u),Multiplication(math.log(self.base),self.u.deriver()))
+        return Multiplication(self.u.deriver(), Multiplication(self.u, Polynome([math.log(self.base)])))
     def __str__(self):
         return f"({self.u})^{self.base}"
-print(Cos(Polynome([0,2])).deriver())

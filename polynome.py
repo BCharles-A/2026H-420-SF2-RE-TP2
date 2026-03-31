@@ -7,7 +7,6 @@ class Polynome(Expression):
     def __init__(self, coefficients: list[float]):
         self.coefficients = coefficients
     def evaluer(self, x: float) -> float:
-        print(self.coefficients)
         eval = self.coefficients.copy()
         valeur = 0
         for i in range(0, len(eval)):

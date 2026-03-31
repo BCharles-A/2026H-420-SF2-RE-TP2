@@ -1,5 +1,5 @@
 from expression import Expression
-
+import math
 
 class Polynome(Expression):
     """Polynome represente par une liste de coefficients [a0, a1, a2, ...]."""
@@ -7,6 +7,7 @@ class Polynome(Expression):
     def __init__(self, coefficients: list[float]):
         self.coefficients = coefficients
     def evaluer(self, x: float) -> float:
+        print(self.coefficients)
         eval = self.coefficients.copy()
         valeur = 0
         for i in range(0, len(eval)):
@@ -24,7 +25,6 @@ class Polynome(Expression):
     def __str__(self) -> str:
         return str(self.coefficients)
 if __name__ == "__main__":
-    p = Polynome([1, 2, 3])
+    p = Polynome([1, 2, 5])
     print(p)
-    print(p.evaluer(2))
     print(p.deriver())

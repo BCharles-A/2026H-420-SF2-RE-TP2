@@ -12,7 +12,7 @@ class Sin(Expression):
     def deriver(self):
         return Multiplication(Cos(self.u),self.u.deriver())
     def __str__(self):
-        return
+        return f"sin({self.u})"
         
 
 
@@ -23,12 +23,20 @@ class Cos(Expression):
     def evaluer(self, x):
         return math.cos(self.u.evaluer(x))
     def deriver(self):
-        return Multiplication(Sin(self.u), self.u.deriver())
-            
+        return Multiplication(-1, Multiplication(Sin(self.u), self.u.deriver()))
+    def __str__(self):
+        return f"cos({self.u})"
 
 
 class Exp(Expression):
     """Expression representant exp(u)."""
-
-    # Votre code ici (remplacer le "pass" par votre implementation)
-    pass
+    def __init__(self, u: Expression, base: float = math.e):
+        self.u = u
+        self.base = base
+    def evaluer(self, x):
+        return self.base ** (self.u.evaluer(x) *  (math.log(x, math.e)* self.u.evaluer(x)))
+    def deriver(self):
+        return Multiplication(Exp(self.base, self.u),Multiplication(math.log(self.base),self.u.deriver()))
+    def __str__(self):
+        return f"({self.u})^{self.base}"
+print(Cos(Polynome([0,2])).deriver())

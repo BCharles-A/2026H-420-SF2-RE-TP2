@@ -15,8 +15,8 @@ class Sin(Expression):
     def __str__(self):
         format = []
         for i in range(len(self.u.coefficients)):
-            format.append(f"{self.u.coefficients[i]}*x^{i}")
-        return f"sin({format})"
+            format.append(f"{self.u.coefficients[i]}x^{i}")
+        return f"sin({'+'.join(format)})"
 
 
 class Cos(Expression):
@@ -31,8 +31,9 @@ class Cos(Expression):
     def __str__(self):
         format = []
         for i in range(len(self.u.coefficients)):
-            format.append(f"{self.u.coefficients[i]}*x^{i}")
-        return f"cos({format})"
+            if(self.u.coefficients[i] != 0):
+                format.append(f"{self.u.coefficients[i]}x^{i}")
+        return f"cos({'+'.join(format)})"
 
 class Exp(Expression):
     """Expression representant exp(u)."""
@@ -47,5 +48,5 @@ class Exp(Expression):
     def __str__(self):
         format = []
         for i in range(len(self.u.coefficients)):
-            format.append(f"{self.u.coefficients[i]}*x^{i}")
-        return f"({self.base})^{format}"
+            format.append(f"{self.u.coefficients[i]}x^{i}")
+        return f"({self.base})^{'+'.join(format)}"

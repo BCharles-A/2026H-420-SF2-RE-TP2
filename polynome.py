@@ -23,6 +23,8 @@ class Polynome(Expression):
         return Polynome(coefficients_derives)
     def __str__(self) -> str:
         format = []
+        while 0 in format:
+            format.remove(0)
         for i in range(len(self.coefficients)):
             if(i == 0):
                 format.append(f"{self.coefficients[i]}")
@@ -31,7 +33,3 @@ class Polynome(Expression):
             else:
                 format.append(f"{self.coefficients[i]}x^{i}")
         return f"({format})"
-if __name__ == "__main__":
-    p = Polynome([1, 2, 5])
-    print(p)
-    print(p.deriver())

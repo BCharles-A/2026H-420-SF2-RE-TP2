@@ -12,7 +12,7 @@ class Addition(Expression):
     def deriver(self) -> "Expression":
         return Addition(self.u.deriver(), self.v.deriver())
     def __str__(self) -> str:
-        return f"({self.u}) + ({self.v})"
+        return f"{self.u} + {self.v}"
 
 
 class Multiplication(Expression):
@@ -26,5 +26,4 @@ class Multiplication(Expression):
     def deriver(self) -> "Expression":
         return Addition(Multiplication(self.u.deriver(), self.v),Multiplication(self.u, self.v.deriver()))
     def __str__(self) -> str:
-        format = []
-        return f"({self.u}) * ({self.v})"
+        return f"({'+'.join(str(self.u).split())}) * ({'+'.join(str(self.v).split())})"

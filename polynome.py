@@ -22,7 +22,15 @@ class Polynome(Expression):
             coefficients_derives = [0]
         return Polynome(coefficients_derives)
     def __str__(self) -> str:
-        return str(self.coefficients)
+        format = []
+        for i in range(len(self.coefficients)):
+            if(i == 0):
+                format.append(f"{self.coefficients[i]}")
+            elif(i == 1):
+                format.append(f"{self.coefficients[i]}x")
+            else:
+                format.append(f"{self.coefficients[i]}x^{i}")
+        return f"({format})"
 if __name__ == "__main__":
     p = Polynome([1, 2, 5])
     print(p)

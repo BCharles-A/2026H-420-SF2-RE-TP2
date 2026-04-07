@@ -7,35 +7,45 @@ class Sin(Expression):
     """Expression representant sin(u)."""
     def __init__(self, u: Expression):
         self.u = u
+        self.coefficients = []
     def evaluer(self, x: float) -> float:   
         return math.sin(self.u.evaluer(x))
     def deriver(self):
         return Multiplication(Cos(self.u),self.u.deriver())
     def __str__(self):
-        return f"sin({self.u})"
-        
+        format = []
+        for i in range(len(self.u.coefficients)):
+            format.append(f"{self.u.coefficients[i]}*x^{i}")
+        return f"sin({format})"
 
 
 class Cos(Expression):
     """Expression representant cos(u)."""
     def __init__(self, u: Expression):
         self.u = u
+        self.coefficients = []
     def evaluer(self, x):
         return math.cos(self.u.evaluer(x))
     def deriver(self):
         return Multiplication(-1, Multiplication(Sin(self.u), self.u.deriver()))
     def __str__(self):
-        return f"cos({self.u})"
-
+        format = []
+        for i in range(len(self.u.coefficients)):
+            format.append(f"{self.u.coefficients[i]}*x^{i}")
+        return f"cos({format})"
 
 class Exp(Expression):
     """Expression representant exp(u)."""
     def __init__(self, u: Expression, base: float = math.e):
         self.u = u
         self.base = base
+        self.coefficients = []
     def evaluer(self, x):
-        return math.pow(self.base, self.u.evaluer(x))
+        return self.base ** self.u.evaluer(x)
     def deriver(self):
-        return Multiplication(self.u.deriver(), Multiplication(self.u, Polynome([math.log(self.base)])))
+        return Multiplication(self.u.deriver(), Multiplication(Exp(self.u, self.base), Polynome([math.log(self.base)])))
     def __str__(self):
-        return f"({self.u})^{self.base}"
+        format = []
+        for i in range(len(self.u.coefficients)):
+            format.append(f"{self.u.coefficients[i]}*x^{i}")
+        return f"({self.base})^{format}"

@@ -15,7 +15,8 @@ class Sin(Expression):
     def __str__(self):
         format = []
         for i in range(len(self.u.coefficients)):
-            format.append(f"{self.u.coefficients[i]}x^{i}")
+            if(self.u.coefficients[i] != 0):
+                format.append(f"{self.u.coefficients[i]}x^{i}")
         return f"sin({'+'.join(format)})"
 
 
@@ -27,7 +28,7 @@ class Cos(Expression):
     def evaluer(self, x):
         return math.cos(self.u.evaluer(x))
     def deriver(self):
-        return Multiplication(-1, Multiplication(Sin(self.u), self.u.deriver()))
+        return Multiplication(Polynome([-1]), Multiplication(Sin(self.u), self.u.deriver()))
     def __str__(self):
         format = []
         for i in range(len(self.u.coefficients)):

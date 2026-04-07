@@ -26,4 +26,6 @@ class Multiplication(Expression):
     def deriver(self) -> "Expression":
         return Addition(Multiplication(self.u.deriver(), self.v),Multiplication(self.u, self.v.deriver()))
     def __str__(self) -> str:
-        return f"({'+'.join(str(self.u).split())}) * ({'+'.join(str(self.v).split())})"
+        if self.coefficients != []:
+            return str(Polynome(self.coefficients))
+        return f"({self.u}) * ({self.v})"

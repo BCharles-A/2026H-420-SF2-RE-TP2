@@ -23,13 +23,12 @@ class Polynome(Expression):
         return Polynome(coefficients_derives)
     def __str__(self) -> str:
         format = []
-        while 0 in format:
-            format.remove(0)
         for i in range(len(self.coefficients)):
-            if(i == 0):
-                format.append(f"{self.coefficients[i]}")
-            elif(i == 1):
-                format.append(f"{self.coefficients[i]}x")
-            else:
-                format.append(f"{self.coefficients[i]}x^{i}")
-        return f"({format})"
+            if(self.coefficients[i] != 0):
+                if(i == 0):
+                    format.append(f"{self.coefficients[i]}")
+                elif(i == 1):
+                    format.append(f"{self.coefficients[i]}x")
+                else:
+                    format.append(f"{self.coefficients[i]}x^{i}")
+        return f"({'+'.join(format)})"
